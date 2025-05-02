@@ -1,8 +1,7 @@
 # This Python file uses the following encoding: utf-8
 import sys
-import time
-from threading import Thread
 
+from PySide6.QtCore import QTimer, Slot
 from PySide6.QtWidgets import QApplication, QWidget
 
 # Important:
@@ -16,18 +15,38 @@ class Widget(QWidget):
         super().__init__(parent)
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
+        self.timer = QTimer(self)
 
-def count_up(widget):
-    seconds_left = 60
-    while seconds_left > 0:
-        seconds_left -= 1
-        widget.ui.progressBar.setValue(int(seconds_left / 60 * 100))
-        time.sleep(1)
+        # Defines a one minute stretch break.
+        self.break_duration_seconds = 60
+        self.break_time_elapsed_seconds = 0
+
+        # Do not confuse the stretch break duration/timer with the QTimer.
+        # The QTimer a class in the framework that's used for ticking and can
+        # raise an event ("signal") each tick, with configurable tick duration.
+        # The stretch break duration/time elapsed track the actual time of the
+        # stretch break and are nothing to do with signals and slots/events and
+        # handlers.
+
+        # We want the progress bar updated once every 1000ms.
+        # We need the event (1000ms timeout elapsing) to be handled by the
+        # method we're passing to connect() here.
+        self.timer.start(1000)
+        self.timer.timeout.connect(self.update_progress_bar)
+
+    @Slot()
+    def update_progress_bar(self):
+        if self.break_time_elapsed_seconds >= self.break_duration_seconds:
+            exit()
+        else:
+            proportion_elapsed = int(
+                self.break_time_elapsed_seconds
+                / self.break_duration_seconds * 100)
+            self.ui.progressBar.setValue(proportion_elapsed)
+            self.break_time_elapsed_seconds += 1
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     widget = Widget()
     widget.show()
-    counter_thread = Thread(target=count_up, args=[widget])
-    counter_thread.run()
     sys.exit(app.exec())
