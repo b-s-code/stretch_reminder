@@ -15,27 +15,21 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QLabel, QProgressBar, QSizePolicy,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QProgressBar, QSizePolicy, QWidget)
 
 class Ui_Widget(object):
     def setupUi(self, Widget):
         if not Widget.objectName():
             Widget.setObjectName(u"Widget")
-        Widget.resize(614, 329)
-        self.label = QLabel(Widget)
-        self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(150, 110, 341, 91))
-        font = QFont()
-        font.setPointSize(72)
-        self.label.setFont(font)
+        Widget.resize(614, 32)
         self.progressBar = QProgressBar(Widget)
         self.progressBar.setObjectName(u"progressBar")
-        self.progressBar.setGeometry(QRect(0, 210, 611, 31))
-        font1 = QFont()
-        font1.setPointSize(10)
-        self.progressBar.setFont(font1)
+        self.progressBar.setGeometry(QRect(0, 0, 611, 31))
+        font = QFont()
+        font.setPointSize(10)
+        self.progressBar.setFont(font)
         self.progressBar.setValue(3)
+        self.progressBar.setInvertedAppearance(False)
 
         self.retranslateUi(Widget)
 
@@ -43,7 +37,6 @@ class Ui_Widget(object):
     # setupUi
 
     def retranslateUi(self, Widget):
-        Widget.setWindowTitle(QCoreApplication.translate("Widget", u"Widget", None))
-        self.label.setText(QCoreApplication.translate("Widget", u"stretch", None))
+        Widget.setWindowTitle(QCoreApplication.translate("Widget", u"Stretch Break", None))
     # retranslateUi
 

@@ -7,35 +7,17 @@
     <x>0</x>
     <y>0</y>
     <width>614</width>
-    <height>329</height>
+    <height>32</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Widget</string>
+   <string>Stretch Break</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>110</y>
-     <width>341</width>
-     <height>91</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>72</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>stretch</string>
-   </property>
-  </widget>
   <widget class="QProgressBar" name="progressBar">
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>210</y>
+     <y>0</y>
      <width>611</width>
      <height>31</height>
     </rect>
@@ -47,6 +29,9 @@
    </property>
    <property name="value">
     <number>3</number>
+   </property>
+   <property name="invertedAppearance">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>
