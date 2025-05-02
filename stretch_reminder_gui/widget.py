@@ -15,11 +15,22 @@ class Widget(QWidget):
         super().__init__(parent)
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
+
+        # Don't show the percentage completion on the progress bar.
+        # It distracts from what's important.
+        self.ui.progressBar.setTextVisible(False)
+
         self.timer = QTimer(self)
 
         # Defines a one minute stretch break.
         self.break_duration_seconds = 60
-        self.break_time_elapsed_seconds = 0
+
+        # Give the user a 3 second head start.  57 seconds of good stretching
+        # motivated by a head start AKA a little bit of cheating is better than
+        # 60 seconds of half-hearted stretching.  Note that a similarly
+        # important value, used to the same effect, is also defined in the GUI
+        # design code.
+        self.break_time_elapsed_seconds = 3
 
         # Do not confuse the stretch break duration/timer with the QTimer.
         # The QTimer a class in the framework that's used for ticking and can

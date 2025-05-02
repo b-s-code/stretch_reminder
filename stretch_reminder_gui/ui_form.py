@@ -31,11 +31,11 @@ class Ui_Widget(object):
         self.label.setFont(font)
         self.progressBar = QProgressBar(Widget)
         self.progressBar.setObjectName(u"progressBar")
-        self.progressBar.setGeometry(QRect(110, 160, 381, 81))
+        self.progressBar.setGeometry(QRect(0, 160, 611, 81))
         font1 = QFont()
         font1.setPointSize(10)
         self.progressBar.setFont(font1)
-        self.progressBar.setValue(0)
+        self.progressBar.setValue(3)
 
         self.retranslateUi(Widget)
 
