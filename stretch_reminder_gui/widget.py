@@ -48,7 +48,7 @@ class Widget(QWidget):
     @Slot()
     def update_progress_bar(self):
         if self.break_time_elapsed_seconds >= self.break_duration_seconds:
-            exit()
+            sys.exit()
         else:
             proportion_elapsed = int(
                 self.break_time_elapsed_seconds
