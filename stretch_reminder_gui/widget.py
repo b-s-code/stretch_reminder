@@ -66,10 +66,9 @@ def should_run():
     # Check config file exists.
     config_file_path = str(Path.home()) + "/.config/stretch_reminder/config.txt"
     if not Path(config_file_path).is_file():
-        # TODO : make print to stderr.
-        print("CONFIG FILE DOES NOT EXIST, OR IS A DIRECTORY.")
-        print(f"EXPECTED LOCATION: {config_file_path}")
-        print("EXITING...")
+        print("CONFIG FILE DOES NOT EXIST, OR IS A DIRECTORY.", file=sys.stderr)
+        print(f"EXPECTED LOCATION: {config_file_path}", file=sys.stderr)
+        print("EXITING...", file=sys.stderr)
         return False
 
     # If config file exists, check whether contents say we should run.
@@ -78,9 +77,8 @@ def should_run():
         config_lines = config.readlines()
     for l in config_lines:
         if l.lower().rstrip() == "off":
-            # TODO : make print to stderr.
-            print("CONFIG FILE EXISTS AND STATES THAT stretch_reminder SHOULD NOT RUN")
-            print(f"CONFIG FILE LOCATION: {config_file_path}")
+            print("CONFIG FILE EXISTS AND STATES THAT stretch_reminder SHOULD NOT RUN.", file=sys.stderr)
+            print(f"CONFIG FILE LOCATION: {config_file_path}", file=sys.stderr)
             return False
 
     return True
