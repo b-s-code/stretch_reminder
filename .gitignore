@@ -57,3 +57,7 @@ compile_commands.json
 __pycache__
 
 *.pyproject.user
+build/
+dist/
+widget.spec
+venv/
