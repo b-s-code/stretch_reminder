@@ -3,6 +3,7 @@ import sys
 
 from PySide6.QtCore import QTimer, Slot
 from PySide6.QtWidgets import QApplication, QWidget
+from pathlib import Path
 
 # Important:
 # You need to run the following command to generate the ui_form.py file
@@ -56,7 +57,37 @@ class Widget(QWidget):
             self.ui.progressBar.setValue(proportion_elapsed)
             self.break_time_elapsed_seconds += 1
 
+def should_run():
+    """
+    Returns False if either config file for strech_reminder does not exist, or
+    the file does exist and contains a line "off" (case-insensitive).
+    Otherwise, returns True.
+    """
+    # Check config file exists.
+    config_file_path = str(Path.home()) + "/.config/stretch_reminder/config.txt"
+    if not Path(config_file_path).is_file():
+        # TODO : make print to stderr.
+        print("CONFIG FILE DOES NOT EXIST, OR IS A DIRECTORY.")
+        print(f"EXPECTED LOCATION: {config_file_path}")
+        print("EXITING...")
+        return False
+
+    # If config file exists, check whether contents say we should run.
+    config_lines = ""
+    with open(config_file_path, "r") as config:
+        config_lines = config.readlines()
+    for l in config_lines:
+        if l.lower().rstrip() == "off":
+            # TODO : make print to stderr.
+            print("CONFIG FILE EXISTS AND STATES THAT stretch_reminder SHOULD NOT RUN")
+            print(f"CONFIG FILE LOCATION: {config_file_path}")
+            return False
+
+    return True
+
 if __name__ == "__main__":
+    if not should_run():
+        sys.exit(1)
     app = QApplication(sys.argv)
     widget = Widget()
     widget.show()
